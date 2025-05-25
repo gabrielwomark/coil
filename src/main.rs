@@ -8,7 +8,7 @@ fn main() {
     let mut index = Index::new(1);
 
     let mut path = String::new();
-    print!("Enter path of file to index");
+    println!("Enter path of file to index");
     io::stdin().read_line(&mut path).expect("failed to read line");
     let path = path.trim();
 

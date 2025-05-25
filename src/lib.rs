@@ -114,7 +114,7 @@ impl Index {
         Ok(())
     }
 
-    pub fn search(&self, query: &str, num_hits: usize) -> Vec<(&String, f64)> {
+    pub fn search(&self, query: &str, num_hits: usize) -> Vec<(String, f64)> {
         let tokens = tokenize(query);
         let mut scores: HashMap<DocId, f64> = HashMap::new();
         for token in tokens.keys() {
@@ -132,6 +132,6 @@ impl Index {
 
         let mut items: Vec<(DocId, f64)> = scores.into_iter().collect();
         items.sort_by(|hita, hitb| hita.1.partial_cmp(&hitb.1).unwrap());
-        items.into_iter().rev().take(num_hits).map(|(doc_id, score)| { (self.forward.get(&doc_id).unwrap(), score) }).collect()
+        items.into_iter().rev().take(num_hits).map(|(doc_id, score)| { (self.forward.get(&doc_id).unwrap().clone(), score) }).collect()
     }
 }
